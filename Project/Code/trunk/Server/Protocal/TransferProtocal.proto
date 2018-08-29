@@ -1,0 +1,74 @@
+ syntax = "proto3";
+
+ message RequestType
+ {
+    enum Type
+    {
+        None = 0;
+        LOGIN_REQ = 1;
+        SAVE_ARCHIVE_REQ = 2;
+        GET_ARCHIVE_REQ = 3;
+        DELETE_ARCHIVE_REQ = 4;
+        REGISTER_REQ = 5;
+    }
+    int32 request = 1;
+ }
+
+ message ResultType
+ {
+    enum Type
+    {
+        None = 0;
+        LOGIN_RES = 1;
+        SAVE_ARCHIVE_RES = 2;
+        GET_ARCHIVE_RES = 3;
+        DELETE_ARCHIVE_RES = 4;
+        REGISTER_RES = 5;
+    }
+    Type result = 1;
+ }
+
+ message Account
+ {
+    string account = 1;
+    string password = 2;
+    bytes data = 3;
+ }
+
+ message RegisterRes
+ {
+    enum ErrorType
+    {
+        None = 0;
+        USER_EXIT = 1;
+        INVALIDATED_ACCOUNT = 2;
+    }
+    bool hasSucceed = 1;
+    ErrorType error = 2;
+ }
+
+ message LoginRes
+ {
+    enum ErrorType
+    {
+        None = 0;
+        INVALIDATED_PASSWORD = 1;
+        INVALIDATED_ACCOUNT  = 2;
+    }
+    bool hasSucceed = 1;
+    ErrorType error = 2;
+ }
+
+ message ArchiveOpRes
+ {
+    enum OpType
+    {
+        None = 0;
+        DELETE = 1;
+        ADD = 2;
+        GET = 3;
+    }
+    bool hasSucceed = 1;
+    OpType operation = 2;
+    bytes data = 3;
+ }
